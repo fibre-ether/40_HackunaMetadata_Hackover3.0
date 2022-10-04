@@ -1,38 +1,42 @@
-.App {
-  text-align: center;
+.sem-card-text {
+  text-decoration: none;
+  color: rgb(79 70 229);
 }
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.sem-card-text:hover {
+  color: rgb(99 102 241);
 }
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
+.bg-mobile {
+  /* background-image: "url(assets/images/login_image.svg)"; */
+  background: black;
+  background-size: cover;
+}
+.margin-top-sm {
+  margin-top: 0;
+}
+@media screen and (max-width: 480px) {
+  .margin-top-sm {
+    margin-top: -10rem;
   }
 }
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
+.font-poppins {
+  font-family: 'Poppins';
+}
+.logout-btn {
+  background: transparent;
   color: white;
 }
-
-.App-link {
-  color: #61dafb;
+.logout-btn:hover {
+  background: rgb(241 245 249);
+  color: rgb(79 70 229);
 }
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.sem-select-card {
+  height: 12rem;
+}
+.footer{
+  background-color: #D1C4E9;
+  margin:0px auto;
+  padding: 20px 0px 20px 0px;
+}
+.navbar-bg {
+  background: #9575CD;
 }
