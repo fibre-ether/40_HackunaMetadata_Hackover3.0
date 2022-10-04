@@ -74,3 +74,11 @@
 .modal_dismiss_btn:focus {
   border: none;
 }
+.add_event_btn {
+  font-size: 20px;
+  font-weight: 500;
+  border: dotted;
+}
+.add_event_btn:hover {
+  border: solid;
+}

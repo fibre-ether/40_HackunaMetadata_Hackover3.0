@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getAllEvents } from "../redux/actions/eventActions";
+import { AiOutlinePlus } from 'react-icons/ai';
 import dummyimage from "../assets/event-image.jpg";
 import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
@@ -18,6 +19,13 @@ function Home() {
   return (
     <div className="container font-poppins">
       <div className="row">
+        <div className="col-12 col-md-6 col-lg-4 mb-4">
+          <Card className="h-100">
+            <Card.Body className="d-flex align-items-center justify-content-center">
+              <CreateEventModal/>
+            </Card.Body>
+          </Card>
+        </div>
         {events.map((item, index) => {
           return (
             <div key={index} className="col-12 col-md-6 col-lg-4 mb-4">
@@ -52,7 +60,6 @@ function Home() {
           );
         })}
       </div>
-      <CreateEventModal/>
     </div>
   );
 }

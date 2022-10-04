@@ -4,6 +4,7 @@ import { AiOutlineClose } from 'react-icons/ai'
 import Col from 'react-bootstrap/Col';
 import Form from 'react-bootstrap/Form';
 import Row from 'react-bootstrap/Row';
+import { AiOutlinePlus } from 'react-icons/ai';
 
 export default function CreateEventModal() { 
     const [show, setShow] = useState(false);
@@ -13,8 +14,11 @@ export default function CreateEventModal() {
   
     return (
       <div className="font-poppins">
-        <button className="btn btn-primary" onClick={handleShow}>
-        Create an event
+        <button className="btn btn-md add_event_btn p-3" onClick={handleShow}>
+            <div className="row">
+            <div className="col-auto g-0"><AiOutlinePlus size={30}/></div>
+            <div className="col-auto g-0">Add an Event</div>
+            </div>
         </button>
   
         <Modal className="font-poppins" show={show} onHide={handleClose} backdrop="static">
