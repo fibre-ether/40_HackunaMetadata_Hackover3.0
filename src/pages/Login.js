@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { loginUser } from "../redux/actions/AuthActions";
+import { loginUser, setLoader } from "../redux/actions/AuthActions";
 import { useEffect } from "react";
 import Card from 'react-bootstrap/Card';
 import FloatingLabel from 'react-bootstrap/FloatingLabel';
@@ -18,7 +18,7 @@ function Login() {
 
   useEffect(() => {
     if (authLoader === "loginSuccess") {
-      navigate("homePageRoute");
+      navigate("/user/home");
     }
     //eslint-disable-next-line
   }, [authLoader]);
@@ -82,7 +82,7 @@ function Login() {
                 </div>
               </form>
               <div className="d-flex flex-row-reverse mb-3">
-                <div><Link to="/register">Don't have an account?</Link></div>
+                <div><Link onClick={()=>{dispatch(setLoader("idle"))}} to="/register">Don't have an account?</Link></div>
               </div>
             </Card.Body>
           </Card>

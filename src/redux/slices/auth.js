@@ -9,19 +9,21 @@ const auth = createSlice({
   },
   reducers: {
     //TODO: move this to extrareducers or move non async extrareducers here (for clean code. Low priority)
-    setToken: (state, action) => {
-      const  token = action.payload
+    setUserInfo: (state, action) => {
+      const { user, token } = action.payload
       return {
         ...state,
+        user,
         token,
       }
     }
   },
   extraReducers: (builder) => {
     builder.addCase(authActions.login + fulfilled, (state, { payload }) => {
-      const { status, token } = payload;
+      const { status, token, user } = payload;
       if (status) {
         state.token = "Bearer " + token;
+        state.user = user;
       }
     });
     builder.addCase(authActions.setLoader, (state, { payload }) => {
@@ -35,7 +37,7 @@ const auth = createSlice({
 });
 
 export const {
-  setToken
+  setUserInfo
 } = auth.actions;
 
 export default auth.reducer;

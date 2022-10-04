@@ -6,9 +6,10 @@ import { AiOutlineClose, AiOutlineHeart } from 'react-icons/ai';
 import { FiLogOut } from 'react-icons/fi';
 import { BsBook } from 'react-icons/bs';
 import { IconContext } from 'react-icons/lib';
-// import { useDispatch } from 'react-redux'
+import { useDispatch } from 'react-redux'
 import { useNavigate } from "react-router-dom";
 // import { logoutUser, setLoader } from "../../redux/actions/AuthActions";
+import { logoutUser } from '../../redux/actions/AuthActions';
 import toast from "react-hot-toast";
 
 const Nav = styled.div`
@@ -46,7 +47,7 @@ const Sidebar = (props) => {
   const showSidebar = () => setSidebar(!sidebar);
 
   const navigate = useNavigate();
-//   const dispatch = useDispatch();
+  const dispatch = useDispatch();
 
 //   useEffect(() => {
 //     dispatch(setLoader("idle"));
@@ -54,8 +55,8 @@ const Sidebar = (props) => {
 
   const handleLogout = () => {
     localStorage.clear();
-    // dispatch(logoutUser())
-    navigate("/");
+    dispatch(logoutUser())
+    navigate("/login");
     toast.success("Successfully Logged out");
   };
 
@@ -104,7 +105,7 @@ const Sidebar = (props) => {
               </div>
               <div className='row text-white font-bold text-md mb-2'>
                 <div className='offset-1 col-auto g-0 mt-1'><FiLogOut/></div>
-                <div className='col-auto'><button onClick={handleLogout}>Logout</button></div>
+                <div className='col-auto'><button onClick={() => {handleLogout()}}>Logout</button></div>
               </div>
             </div>
           </SidebarWrap>

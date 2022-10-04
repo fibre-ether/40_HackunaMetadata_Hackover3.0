@@ -3,7 +3,7 @@ const isAuthenticated = () => {
   const userType = localStorage.getItem("type");
   const user = localStorage.getItem("user");
 
-  const isAuth = !!authToken && !!userType && !!user;
+  const isAuth = !!authToken;
 
   return { isAuth };
 };

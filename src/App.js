@@ -10,6 +10,7 @@ import { Provider } from "react-redux";
 import { store } from "./redux/store";
 import UserRoute from "./routes/UserRoute";
 import Register from "./pages/Register";
+import Home from "./pages/Home";
 
 function App() {
   return (
@@ -25,6 +26,7 @@ function App() {
             <Route path="/" name="" element={<AdminEvents/>} />
 
             <Route route="/user" element={<UserRoute />}>
+              <Route path="/user/home" element={<Home />} />
             </Route>
 
             <Route path="*" name="404" element={<>404</>} />
