@@ -5,9 +5,13 @@ const auth = {
   logout: "auth/logout",
 };
 
+const event = {
+  getAll: "event/getAll",
+}
+
 const user = {
 }
 
 const fulfilled = "/fulfilled"
 
-export { auth, user, fulfilled };
+export { auth, user, event, fulfilled };
