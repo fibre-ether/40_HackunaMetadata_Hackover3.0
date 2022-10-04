@@ -5,6 +5,7 @@ import db from './config/db.js'
 import morgan from 'morgan'
 import userRouter from './routes/user.js'
 import eventRouter from './routes/events.js'
+import paymentRouter from './routes/payment.js'
 import cors from 'cors'
 
 const port = process.env.PORT || 3001
@@ -17,6 +18,9 @@ app.use(cors())
 app.use(express.json())
 app.use('/api/v1/user', userRouter)
 app.use('/api/v1/event', eventRouter)
+app.use('/api/v1/', paymentRouter)
+
+
 
 const server = app.listen(port, () =>
   console.log(`server has started on port ${port}`)
