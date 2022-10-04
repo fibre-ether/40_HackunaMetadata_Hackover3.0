@@ -4,9 +4,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { loginUser, setLoader } from "../redux/actions/AuthActions";
 import { useEffect } from "react";
 import Card from 'react-bootstrap/Card';
-import LoginForm from "./LoginForm";
-import Tab from 'react-bootstrap/Tab';
-import Tabs from 'react-bootstrap/Tabs';
 import FloatingLabel from 'react-bootstrap/FloatingLabel';
 import Form from 'react-bootstrap/Form';
 
@@ -40,35 +37,16 @@ function Login() {
   return (
     <div className="container font-poppins">
       <div className="row">
-        <div className="col-12 offset-lg-1 col-lg-10">
+        <div className="col-12 offset-md-1 col-md-10 offset-lg-2 col-lg-8">
           <Card className="box-shadow">
-            {/* <Card.Header>
+            <Card.Header>
             <div className="row">
-                  <div className="col-4"><button className="w-100 register_tabs" autoFocus onClick={() => setUserType("user")}>User</button></div>
+                  <div className="col-4"><button className="w-100 register_tabs" onClick={() => setUserType("user")}>User</button></div>
                   <div className="col-4"><button className="w-100 register_tabs" onClick={() => setUserType("organizer")}>Organizer</button></div>
                   <div className="col-4"><button className="mb-n1 w-100 register_tabs" onClick={() => setUserType("admin")}>Admin</button></div>
                 </div>
-            </Card.Header> */}
-
-            <Tabs
-              defaultActiveKey="user"
-              id="fill-tab-example"
-              className="mb-3"
-              transition={false}
-              fill
-            >
-              <Tab eventKey="user" title="User" onClick={() => setUserType("user")}>
-                <LoginForm />
-              </Tab>
-              <Tab eventKey="organizer" title="Organizer" onClick={() => setUserType("organizer")}>
-                <LoginForm />
-              </Tab>
-              <Tab eventKey="admin" title="Admin" onClick={() => setUserType("admin")}>
-                <LoginForm />
-              </Tab>
-            </Tabs>
-
-            {/* <Card.Body>
+            </Card.Header>
+            <Card.Body>
               
               <Card.Title>
                 
@@ -96,7 +74,7 @@ function Login() {
                   </div>
                   <div className="col-12 offset-md-2 col-md-8 mt-3">
                     <button
-                      className="navy-btn w-100 justify-center rounded-md border border-transparent py-2 px-4 text-white focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 font-semibold text-lg disabled:bg-indigo-400 "
+                      className="navy-btn w-100 justify-center rounded-md border border-transparent py-2 px-4 text-white focus:outline-none focus:ring-2 focus:ring-purple-300 focus:ring-offset-2 font-semibold text-lg disabled:bg-purple-300 "
                       disabled={authLoader==="loading"}
                       >
                       {authLoader==="loading" ? "Signing in..." : "Sign in"}
@@ -107,7 +85,7 @@ function Login() {
               <div className="d-flex flex-row-reverse mb-3">
                 <div><Link onClick={()=>{dispatch(setLoader("idle"))}} to="/register">Don't have an account?</Link></div>
               </div>
-            </Card.Body> */}
+            </Card.Body>
           </Card>
         </div>
       </div>
