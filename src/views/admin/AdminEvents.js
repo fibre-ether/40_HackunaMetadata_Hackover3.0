@@ -1,4 +1,6 @@
 import Card from "react-bootstrap/Card";
+import FormModal from "../components/FormModal";
+import Modal from "../components/Modal";
 import RazorPay from "../components/razorPay";
 
 export default function AdminEvents() {
@@ -51,7 +53,9 @@ export default function AdminEvents() {
           </Card>
         </div>
       </div>
-      <RazorPay />
+      {/* <RazorPay /> */}
+      {/* <Modal /> */}
+      <FormModal />
     </div>
   );
 }
