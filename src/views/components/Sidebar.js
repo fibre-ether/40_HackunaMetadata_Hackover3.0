@@ -72,8 +72,7 @@ const Sidebar = (props) => {
                 </NavIcon>
               </div>
               <div className='col-auto text-white font-bold text-lg'>
-                {/* Welcome, {props.name.split(" ")[0].replace('"','')} */}
-                Welcome, name
+                Welcome, {props.name.split(" ")[0].replace('"','')}
               </div>
             </div>
           </div>
@@ -88,10 +87,7 @@ const Sidebar = (props) => {
                   </NavIcon>
                 </div>
               </div>
-              {/* <div className='row justify-content-center text-white font-bold text-lg mt-3 mb-4'>{props.name.replace(/"/g,'')}</div> */}
-              <div className='row justify-content-center font-bold text-lg mt-3 mb-4 text-white'>Name</div>
-              {/* <div className='row justify-content-center text-white font-bold text-lg mt-3 mb-4'>{props.sap}</div> */}
-              <div className='row justify-content-center font-bold text-lg mt-3 mb-4 text-white'>ID</div>
+              <div className='row justify-content-center text-white font-bold text-lg mt-3 mb-4'>{props.name.replace(/"/g,'')}</div>
               <div className='row text-white font-bold text-md mb-2'>
                 <div className='offset-1 col-10'><hr/></div>
               </div>
