@@ -16,17 +16,18 @@ const loginUser = createAsyncThunk(
       });
       const responseData = response.data;
       if (responseData.token) {
-        const { token } = responseData;
+        const { token, name, email, role, myEvents, otherEvents, verified } = responseData;
+        const user = {name, email, role, myEvents, otherEvents, verified}
         localStorage.setItem(
           "user",
-          JSON.stringify({ token })
+          JSON.stringify(user)
         );
         localStorage.setItem("token", "Bearer " + token );
 
         thunkAPI.dispatch(setLoader("loginSuccess"));
 
         toast.success("Successfully Logged in");
-        return { token, status: 200 };
+        return { user, token, status: 200 };
       }
     } catch (error) {
       thunkAPI.dispatch(setLoader("error"));

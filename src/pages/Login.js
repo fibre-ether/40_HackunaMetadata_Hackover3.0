@@ -1,8 +1,11 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { loginUser } from "../redux/actions/AuthActions";
+import { loginUser, setLoader } from "../redux/actions/AuthActions";
 import { useEffect } from "react";
+import Card from 'react-bootstrap/Card';
+import FloatingLabel from 'react-bootstrap/FloatingLabel';
+import Form from 'react-bootstrap/Form';
 
 function Login() {
   const dispatch = useDispatch();
@@ -15,7 +18,7 @@ function Login() {
 
   useEffect(() => {
     if (authLoader === "loginSuccess") {
-      navigate("homePageRoute");
+      navigate("/user/home");
     }
     //eslint-disable-next-line
   }, [authLoader]);
@@ -32,75 +35,57 @@ function Login() {
   };
 
   return (
-    <div className="md:bg-none bg-cover font-poppins">
-      <div className="w-full h-screen flex backdrop-blur-sm">
-        <div className="grid grid-cols-1 md:grid-cols-2 m-auto h-[550px] md:shadow-lg md:shadow-gray-300 w-[900px] rounded-lg">
-          <div className="w-[900px] flex-col justify-around">
-            <div className="flex min-h-full items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
-              <div className="w-full max-w-md space-y-8">
-                <div>
-                  <h2 className="px-5 p-md-0 mt-6 text-center text-3xl font-bold tracking-tight text-indigo-600 margin-top-sm">
-                    Sign In To Your Account
-                  </h2>
+    <div className="container font-poppins">
+      <div className="row">
+        <div className="col-12 offset-lg-1 col-lg-10">
+          <Card className="box-shadow">
+            <Card.Header>
+            <div className="row">
+                  <div className="col-4"><button className="btn btn-lg w-100" onClick={() => setUserType("user")}>User</button></div>
+                  <div className="col-4"><button className="btn btn-lg w-100" onClick={() => setUserType("organizer")}>Organizer</button></div>
+                  <div className="col-4"><button className="btn btn-lg w-100" onClick={() => setUserType("admin")}>Admin</button></div>
                 </div>
-                <div className="h-12 w-auto flex justify-center items-center">
-                    <button className="mx-2 w-24 flex justify-center rounded-md border-2 p-2" onClick={() => setUserType("user")} >User</button>
-                    <button className="mx-2 w-24 flex justify-center rounded-md border-2 p-2" onClick={() => setUserType("organizer")} >Organizer</button>
-                    <button className="mx-2 w-24 flex justify-center rounded-md border-2 p-2" onClick={() => setUserType("admin")} >Admin</button>
-                </div>
-                <form className="mt-8 space-y-5" onSubmit={handleSubmit}>
-                  <div className="-space-y-px rounded-md">
-                  <div>
-                      <label htmlFor="email" className="sr-only">
-                        Email
-                      </label>
-                      <input
-                        id="email"
-                        name="email"
-                        type="email"
-                        value={credentials.email}
-                        required
-                        className="relative block w-full appearance-none rounded-none rounded-t-md border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
-                        placeholder="Email"
-                        onChange={handleChange}
-                      />
-                    </div>
-                    <div>
-                      <label htmlFor="password" className="sr-only">
-                        Password
-                      </label>
-                      <input
-                        id="password"
-                        name="password"
-                        type="password"
-                        value={credentials.password}
-                        required
-                        className="relative block w-full appearance-none rounded-none rounded-b-md border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
-                        placeholder="Password"
-                        onChange={handleChange}
-                      />
-                    </div>
+            </Card.Header>
+            <Card.Body>
+              <Card.Title>
+                
+              </Card.Title>
+              <div className="mt-3 mb-3 d-flex justify-content-center">
+                <div className="login_signup_header">Sign In To Your Account</div>
+              </div>
+              <form onSubmit={handleSubmit}>
+                <div className="mb-5 mt-5 row">
+                  <div className="col-12 offset-md-2 col-md-8"><FloatingLabel
+                    controlId="floatingInput"
+                    label="Email address" htmlFor="email"
+                    className="mb-3">
+                      <Form.Control id="email" name="email" type="email" placeholder="name@example.com" value={credentials.email}
+                        required onChange={handleChange} />
+                    </FloatingLabel>
                   </div>
-
-                  <div className="flex items-center justify-between">
-                    <div className="text-sm">
-                      {/* <p className="font-medium text-indigo-400 hover:text-indigo-600">
-                        Forgot your password?
-                      </p> */}
-                    </div>
+                  <div className="col-12 offset-md-2 col-md-8"><FloatingLabel
+                    controlId="floatingPassword"
+                    label="Password" htmlFor="password"
+                    className="mb-3">
+                      <Form.Control id="password" name="password" type="password" placeholder="Password" value={credentials.password}
+                        required onChange={handleChange} />
+                    </FloatingLabel>
                   </div>
-                  <div>
+                  <div className="col-12 offset-md-2 col-md-8 mt-3">
                     <button
-                      className="group relative flex w-full justify-center rounded-md border border-transparent bg-indigo-600 py-2 px-4 text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 font-semibold text-lg disabled:bg-indigo-400 "
+                      className="navy-btn w-100 justify-center rounded-md border border-transparent py-2 px-4 text-white focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 font-semibold text-lg disabled:bg-indigo-400 "
                       disabled={authLoader==="loading"}
                       >
-                      {authLoader==="loading" ? "..." : "Sign in"}
+                      {authLoader==="loading" ? "Signing in..." : "Sign in"}
                     </button>
                   </div>
-                </form>
+                </div>
+              </form>
+              <div className="d-flex flex-row-reverse mb-3">
+                <div><Link onClick={()=>{dispatch(setLoader("idle"))}} to="/register">Don't have an account?</Link></div>
               </div>
-            </div>
-          </div>
+            </Card.Body>
+          </Card>
         </div>
       </div>
     </div>

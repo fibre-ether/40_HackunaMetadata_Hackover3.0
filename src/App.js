@@ -10,6 +10,7 @@ import { Provider } from "react-redux";
 import { store } from "./redux/store";
 import UserRoute from "./routes/UserRoute";
 import Register from "./pages/Register";
+import Home from "./pages/Home";
 
 function App() {
   return (
@@ -20,10 +21,12 @@ function App() {
           <Navbar />
           <Routes>
             <Route path="/register" name="register" element={<Register />} />
-            <Route path="/login" name="login" element={<Login />} />
-            <Route path="/" name="" element={<AdminEvents />} />
+            <Route path="/login" name="login" element={<Login/>} />
+            <Route path="/" name="" element={<AdminEvents/>} />
 
-            <Route route="/user" element={<UserRoute />}></Route>
+            <Route route="/user" element={<UserRoute />}>
+              <Route path="/user/home" element={<Home />} />
+            </Route>
 
             <Route path="*" name="404" element={<>404</>} />
           </Routes>

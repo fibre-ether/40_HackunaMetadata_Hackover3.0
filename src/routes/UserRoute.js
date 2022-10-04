@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { Outlet } from "react-router-dom";
-import { setToken } from "../redux/slices/auth";
+import { setUserInfo } from "../redux/slices/auth";
 import { PrivateRoute } from "./PrivateRoute";
 
 function UserRoute() {
@@ -13,7 +13,7 @@ function UserRoute() {
       token: localStorage.getItem("token"),
     };
     
-    dispatch(setToken(userInfo.token));
+    dispatch(setUserInfo(userInfo));
     //dispatch(setUserInfo(userInfo.user));
   }, [dispatch]);
 
