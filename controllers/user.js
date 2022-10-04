@@ -70,10 +70,26 @@ const getUnverifiedOrganizers = async(req,res)=>{
   }
 }
 
+const joinEvent = async (req, res) => {
+  try {
+    const {id , event_id} = req.body;
+    const user = await User.findOneAndUpdate({_id : id} ,  {'$push': { 'otherEvents': event_id} });
+    console.log(user);
+    //sendWelcomeEmail(user.email, user.name)
+    res.status(201).send({"status" : true , "event" : "subscribed to event successfully!"})
+  } catch (e) {
+    res.status(400).json({
+      success: false,
+      message: e.message,
+    })
+  }
+}
+
 
 
   export {
     login,
     registerNewUser,
     getUnverifiedOrganizers,
+    joinEvent
   }
