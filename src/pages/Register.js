@@ -64,7 +64,7 @@ const handleImageUpload = (e) => {
                     controlId="floatingInput"
                     label="Name" htmlFor="name"
                     className="mb-3">
-                      <Form.Control id="name" name="name" type="text" placeholder="Name" value={credentials.name}
+                      <Form.Control controlid="name" name="name" type="text" placeholder="Name" value={credentials.name}
                         required onChange={handleChange} />
                     </FloatingLabel>
                   </div>
@@ -72,7 +72,7 @@ const handleImageUpload = (e) => {
                     controlId="floatingInput"
                     label="Email address" htmlFor="email"
                     className="mb-3">
-                      <Form.Control id="email" name="email" type="email" placeholder="name@example.com" value={credentials.email}
+                      <Form.Control controlid="email" name="email" type="email" placeholder="name@example.com" value={credentials.email}
                         required onChange={handleChange} />
                     </FloatingLabel>
                   </div>
@@ -80,7 +80,7 @@ const handleImageUpload = (e) => {
                     controlId="floatingPassword"
                     label="Password" htmlFor="password"
                     className="mb-3">
-                      <Form.Control id="password" name="password" type="password" placeholder="Password" value={credentials.password}
+                      <Form.Control controlid="password" name="password" type="password" placeholder="Password" value={credentials.password}
                         required onChange={handleChange} />
                     </FloatingLabel>
                   </div>

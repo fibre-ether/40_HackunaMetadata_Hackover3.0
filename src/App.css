@@ -48,3 +48,7 @@
 .box-shadow {
   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 }
+.register_tabs:focus {
+  border: none;
+  border-bottom: 2px solid black;
+}
