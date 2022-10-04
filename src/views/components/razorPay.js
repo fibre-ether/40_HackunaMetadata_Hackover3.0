@@ -27,14 +27,17 @@ function RazorPay() {
       return;
     }
 
-    const data = await fetch("http://localhost:1337/razorpay", {
-      method: "POST",
-    }).then((t) => t.json());
+    const data = await fetch(
+      "https://hackover-backend-40.vercel.app/api/v1/pay",
+      {
+        method: "POST",
+      }
+    ).then((t) => t.json());
 
     console.log(data);
 
     const options = {
-      key: "rzp_test_0tpemkHKm5K1Bc",
+      key: "rzp_test_jsXvpbAIRO5fPn",
       currency: data.currency,
       amount: data.amount.toString(),
       order_id: data.id,
@@ -49,9 +52,9 @@ function RazorPay() {
         alert("Transaction successful");
       },
       prefill: {
-        name: "Rajat",
-        email: "rajat@rajat.com",
-        phone_number: "9899999999",
+        name: "John Doe",
+        email: "dummy@gmail.com",
+        phone_number: "111111111",
       },
     };
     const paymentObject = new window.Razorpay(options);
@@ -62,14 +65,14 @@ function RazorPay() {
     <div className="App">
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
-        <a
+        <button
           className="App-link"
           onClick={showRazorpay}
           target="_blank"
           rel="noopener noreferrer"
         >
           Pay now
-        </a>
+        </button>
       </header>
     </div>
   );
