@@ -70,8 +70,10 @@ const getUnverifiedOrganizers = async(req,res)=>{
   }
 }
 
+
+
   export {
     login,
     registerNewUser,
-    getUnverifiedOrganizers
+    getUnverifiedOrganizers,
   }

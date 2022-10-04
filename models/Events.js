@@ -8,7 +8,7 @@ const eventSchema = mongoose.Schema({
     },
     category : {
         type: String,
-        enum:["Hackathons" , "Music Festivals" , "Sports" , "Cultural" , "Open Mic"],
+        enum:["Hackathon" , "Music Festivals" , "Sports" , "Cultural" , "Open Mic"],
         required: [true,'Please enter type of event'],
     },
     price: {
