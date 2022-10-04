@@ -29,9 +29,6 @@
   background: rgb(241 245 249);
   color: rgb(79 70 229);
 }
-.sem-select-card {
-  height: 12rem;
-}
 .footer{
   background-color: #D1C4E9;
   margin:0px auto;
@@ -39,4 +36,15 @@
 }
 .navbar-bg {
   background: #9575CD;
+}
+.login_signup_header {
+  font-size: 30px;
+  color: #512DA8;
+  font-weight: 600;
+}
+.navy-btn {
+  background: #512DA8;
+}
+.box-shadow {
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 }

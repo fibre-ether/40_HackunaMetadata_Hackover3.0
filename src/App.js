@@ -4,7 +4,7 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Navbar from "./views/components/Navbar";
 import Footer from "./views/components/Footer";
 import AdminEvents from "./views/admin/AdminEvents";
-// import Login from "./pages/Login";
+import Login from "./pages/Login";
 import { Toaster } from "react-hot-toast";
 import { Provider } from "react-redux";
 import { store } from "./redux/store";
@@ -21,7 +21,7 @@ function App() {
           <Routes>
 
             <Route path="/register" name="register" element={<Register />} />
-            <Route path="/login" name="login" element={<Login />} />
+            <Route path="/login" name="login" element={<Login/>} />
             <Route path="/" name="" element={<AdminEvents/>} />
 
             <Route route="/user" element={<UserRoute />}>
