@@ -18,9 +18,8 @@ function App() {
       <Provider store={store}>
         <Toaster position="top-right" />
         <BrowserRouter>
-          <Navbar/>
+          <Navbar />
           <Routes>
-
             <Route path="/register" name="register" element={<Register />} />
             <Route path="/login" name="login" element={<Login/>} />
             <Route path="/" name="" element={<AdminEvents/>} />
@@ -31,7 +30,7 @@ function App() {
 
             <Route path="*" name="404" element={<>404</>} />
           </Routes>
-          <Footer/>
+          <Footer />
         </BrowserRouter>
       </Provider>
     </>
