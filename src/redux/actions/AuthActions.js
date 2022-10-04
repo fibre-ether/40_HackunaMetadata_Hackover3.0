@@ -6,26 +6,27 @@ import { auth } from "./actions";
 
 const loginUser = createAsyncThunk(
   auth.login,
-  async ({ sap, password }, thunkAPI) => {
+  async ({ email, password, role }, thunkAPI) => {
     thunkAPI.dispatch(setLoader("loading"));
     try {
-      const response = await AXIOS.post("apiRoute", {
-        sap,
+      const response = await AXIOS.post("api/v1/user/login", {
+        email,
         password,
+        role,
       });
       const responseData = response.data;
       if (responseData.token) {
-        const { /* deconstruct */ } = responseData;
+        const { token } = responseData;
         localStorage.setItem(
           "user",
-          JSON.stringify({ /* put deconstructed stuff here */ })
+          JSON.stringify({ token })
         );
-        localStorage.setItem("token", "Bearer " + "token" /*put token here*/);
+        localStorage.setItem("token", "Bearer " + token );
 
-        thunkAPI.dispatch(setLoader("success"));
+        thunkAPI.dispatch(setLoader("loginSuccess"));
 
         toast.success("Successfully Logged in");
-        return { token: "token" /* put token here */, status: 200 };
+        return { token, status: 200 };
       }
     } catch (error) {
       thunkAPI.dispatch(setLoader("error"));
@@ -35,8 +36,37 @@ const loginUser = createAsyncThunk(
   }
 );
 
+const registerUser = createAsyncThunk(
+  auth.register,
+  async ({ email, name, password, role, image }, thunkAPI) => {
+    thunkAPI.dispatch(setLoader("loading"));
+    try {
+      const response = await AXIOS.post("api/v1/user/signup", {
+        email,
+        name,
+        password,
+        image,
+        role,
+      });
+      const responseData = response.data;
+      if (responseData.token) {
+        console.log(responseData)
+
+        thunkAPI.dispatch(setLoader("signUpSuccess"));
+
+        toast.success("Successfully Registered");
+        return { status: 200 };
+      }
+    } catch (error) {
+      thunkAPI.dispatch(setLoader("error"));
+      toast.error("Some error occured");
+      return thunkAPI.rejectWithValue({ error: error?.message });
+    }
+  }
+);
+
 const logoutUser = createAction(auth.logout);
 
 const setLoader = createAction(auth.setLoader);
 
-export { setLoader, loginUser, logoutUser };
+export { setLoader, loginUser, registerUser, logoutUser };
