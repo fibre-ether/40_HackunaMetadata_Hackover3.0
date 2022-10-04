@@ -1,4 +1,4 @@
-import Event from "../models/events.js";
+import Event from "../models/Events.js";
 
 const getAllCategories = async(req,res)=>{
     try{
