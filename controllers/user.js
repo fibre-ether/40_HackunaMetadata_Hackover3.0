@@ -1,5 +1,6 @@
-import User from '../models/Users.js'
-import bcrypt from 'bcryptjs'
+import User from '../models/Users.js';
+import bcrypt from 'bcryptjs';
+import mongoose, { mongo } from 'mongoose';
 // import jwt from 'jsonwebtoken'
 // import { sendWelcomeEmail } from '../emails/account.js'
 
@@ -49,7 +50,29 @@ const registerNewUser = async (req, res) => {
   }
 }
 
+const getUnverifiedOrganizers = async(req,res)=>{
+  try{
+      const id = req.query.id;
+      const organizers = await User.find({
+          verified : false,
+          role : "organizer",
+          myAdmin : id
+      });
+      if(!organizers){
+          console.log('No organizers found');
+          res.status(200).json({'message': 'No organizers found' , status: true});
+      }else{
+          res.status(200).json({"organizers": organizers , "status":true})
+      }
+
+  }catch(error){
+      console.log(error);
+      res.status(500).json({'message':'Invalid entry', 'status': false,});
+  }
+}
+
   export {
     login,
-    registerNewUser
+    registerNewUser,
+    getUnverifiedOrganizers
   }
