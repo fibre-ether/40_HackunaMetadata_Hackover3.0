@@ -1,5 +1,4 @@
 import User from '../models/Users.js';
-import bcrypt from 'bcryptjs';
 import mongoose, { mongo } from 'mongoose';
 // import jwt from 'jsonwebtoken'
 // import { sendWelcomeEmail } from '../emails/account.js'
@@ -17,7 +16,7 @@ const login = async (req, res) => {
       }
       // Validate if user exist in our database
       const user = await User.findOne({ "email" : email  , "role" : role});
-      if (user && (await bcrypt.compare(password, user.password))) {
+      if (user && (user.password.trim() == password.trim())) {
         // Create token
         const token = await user.generateAuthToken();
         // save user token
