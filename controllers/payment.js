@@ -50,6 +50,7 @@ const makePayment =  async (req, res) => {
 		const user = await User.findOneAndUpdate({_id : id} ,  {'$push': { 'otherEvents': event_id} });
 		console.log(user)
 		if(user){
+			sendWelcomeEmail(user.email , req.body.id , "Hosted by US")
 			res.status(201).json({
 				id: response.id,
 				currency: response.currency,

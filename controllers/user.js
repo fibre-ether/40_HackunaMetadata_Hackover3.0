@@ -108,9 +108,14 @@ const joinEvent = async (req, res) => {
   try {
     const {id , event_id} = req.body;
     const user = await User.findOneAndUpdate({_id : id} ,  {'$push': { 'otherEvents': event_id} });
-    await Event.findOneAndUpdate({_id : req.body.id},{$inc : {'participants' : 1}} , {upsert:true});
-    sendWelcomeEmail("", "")
-    res.status(201).send({"status" : true , "event" : "subscribed to event successfully!"})
+    const event = await Event.findOneAndUpdate({_id : req.body.id},{$inc : {'participants' : 1}} , {upsert:true});
+    if(user!=null && event!=null){
+      sendWelcomeEmail(user.email , req.body.id , event.name ?? "Hosted by US")
+      res.status(201).send({"status" : true , "event" : "subscribed to event successfully!"})
+    }else{
+      res.status(400).send({"status" : false , "message" : "Error in User"})
+    }
+
   } catch (e) {
     res.status(400).json({
       success: false,

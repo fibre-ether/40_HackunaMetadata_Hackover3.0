@@ -1,13 +1,13 @@
 import nodemailer from 'nodemailer';
-
+import QRCode from 'qrcode';
 import dotenv from 'dotenv'
 dotenv.config()
 
 let transporter = nodemailer.createTransport({
   service: 'gmail',
   auth: {
-    user: 'ojas@crucibo.com',
-    pass : 'rltzghbuxxkowgxz'
+    user: process.env.EMAIL,
+    pass : process.env.PASS
     // type: 'OAuth2',
     // user: process.env.MAIL_USERNAME,
     // pass: process.env.MAIL_PASSWORD,
@@ -17,19 +17,40 @@ let transporter = nodemailer.createTransport({
   }
 });
 
-const sendWelcomeEmail = (email, name) => transporter.sendMail({
-  from: 'developer.ojask@gmail.com',
-  to: 'ojask2002@gmail.com',
-  subject: "Welcome!",
-  text: `Thanks for joining us, ${name}.
+const sendWelcomeEmail = (email , id , name) =>{
+  let img64;
+  QRCode.toDataURL(id)
+  .then(url => {
+    img64 = url;
 
-  Regards.`
-}, (err, info) => {
-  if(err){
-    return console.log(err)
-  }
-  console.log("Message sent: %s", info.messageId);
-})
+    transporter.sendMail({
+      from: process.env.EMAIL,
+      to: email,
+      subject: "Booking Confirmation !",
+      text: `We are glad to inform you that , we have recieved your confirmation for the event ${name}.
+
+      Regards.
+      Team Hackuna-MetaData`,
+      attachments: [
+        {   // encoded string as an attachment
+          filename: 'confirmation.png',
+          content: img64.split("base64,")[1],
+          encoding: 'base64'
+        }
+      ]
+    }, (err, info) => {
+      if(err){
+        return console.log(err)
+      }
+      console.log("Message sent: %s", info.messageId);
+    })
+
+  })
+  .catch(err => {
+    console.error(err)
+  })
+
+ }
 
 export {
   sendWelcomeEmail,
