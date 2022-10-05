@@ -17,19 +17,20 @@ const getAllCategories = createAsyncThunk(event.getAllCats, async (_, thunkAPI) 
     return thunkAPI.reject;
   }
 });
-/* const getEventsByCategories = createAsyncThunk(event.getAllCats, async ({ category }, thunkAPI) => {
+
+const getEventsByCategories = createAsyncThunk(event.getEventsByCats, async ({ category }, thunkAPI) => {
   thunkAPI.dispatch(setLoader("loading"));
   try {
     const response = await AXIOS.get(`api/v1/event/category?cat=${category}`);
     thunkAPI.dispatch(setLoader("success"));
-    return { category: response.data.category };
+    return { events: response.data.events };
   } catch (error) {
     thunkAPI.dispatch(setLoader("error"));
     toast.error("Some error occured:");
     console.log(error);
     return thunkAPI.reject;
   }
-}); */
+});
 
 const getAllEvents = createAsyncThunk(event.getAll, async (_, thunkAPI) => {
   thunkAPI.dispatch(setLoader("loading"));
@@ -157,4 +158,4 @@ const deleteEvent = createAsyncThunk(event.delete, async ({ id }, thunkAPI) => {
   }
 });
 
-export { getAllCategories, /* getEventsByCategories, */ getAllEvents, createEvent, deleteEvent, updateEvent };
+export { getAllCategories, getEventsByCategories, getAllEvents, createEvent, deleteEvent, updateEvent };

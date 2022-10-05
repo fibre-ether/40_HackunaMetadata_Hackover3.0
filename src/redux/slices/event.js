@@ -5,6 +5,7 @@ const event = createSlice({
   name: "event",
   initialState: {
     events: [],
+    eventsByCats: [],
     categories: [],
     eventLoader: "idle",
   },
@@ -36,6 +37,10 @@ const event = createSlice({
     builder.addCase(eventActions.getAllCats + fulfilled, (state, { payload }) => {
       console.log(payload);
       state.categories = payload.category;
+    });
+    builder.addCase(eventActions.getEventsByCats + fulfilled, (state, { payload }) => {
+      console.log(payload);
+      state.eventsByCats = payload.events || [];
     });
   },
 });
