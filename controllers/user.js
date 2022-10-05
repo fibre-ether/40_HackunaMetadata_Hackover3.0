@@ -118,6 +118,37 @@ const joinEvent = async (req, res) => {
   }
 }
 
+const checkVerification = async (req, res) => {
+  try {
+    const {id , accepted} = req.body;
+    if(accepted==true){
+      const user = await User.findOneAndUpdate({_id : id , role:"organizer"} ,  {'verified': true} );
+      res.status(201).send({"status" : true , "message" : "Verified ! "})
+    }else{
+      User.remove({_id: req.body.id}, (err) => {
+        if (err) {
+          res.status(400).json({
+              success: false,
+              message: err.message,
+            })
+        }
+        else {
+          res.status(200).json({
+              success: true,
+              message: "Deleted Successfully!",
+            })
+        }
+      });
+
+    }
+  } catch (e) {
+    res.status(400).json({
+      success: false,
+      message: e.message,
+    })
+  }
+}
+
 
 
   export {
@@ -125,5 +156,6 @@ const joinEvent = async (req, res) => {
     registerNewUser,
     getUnverifiedOrganizers,
     joinEvent,
-    fileUpload
+    fileUpload,
+    checkVerification
   }

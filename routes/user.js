@@ -5,7 +5,8 @@ import {
   registerNewUser,
   getUnverifiedOrganizers,
   joinEvent,
-  fileUpload
+  fileUpload,
+  checkVerification
 } from'../controllers/user.js'
 import Multer from 'multer';
 
@@ -22,6 +23,7 @@ const multer = Multer({
 router.post('/login', login)
 router.post('/signup', registerNewUser)
 router.post('/joinEvent', joinEvent)
+router.post('/verifyOrg', checkVerification)
 router.post('/verifyImg', multer.single("file") , fileUpload)
 
 // Admin
