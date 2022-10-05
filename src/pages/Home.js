@@ -10,26 +10,26 @@ import CreateEventModal from "../views/components/CreateEventModal";
 function Home() {
   const dispatch = useDispatch();
   const { events } = useSelector((state) => state.event);
+  const { user } = useSelector((state) => state.auth);
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
   useEffect(() => {
     dispatch(getAllEvents());
-    dispatch(getAllCategories());
-    dispatch(getEventsByCategories({category: "Hackathon"}));
   }, [dispatch]);
-
   return (
     <div className="container font-poppins">
       <div className="row">
-        <div className="col-12 col-md-6 col-lg-4 mb-4">
-          <Card className="h-100">
-            <Card.Body className="d-flex align-items-center justify-content-center">
-              <CreateEventModal/>
-            </Card.Body>
-          </Card>
-        </div>
+        { (user.role=="admin" || (user.role=="organizer" && user.verified)) && 
+          <div className="col-12 col-md-6 col-lg-4 mb-4">
+            <Card className="h-100">
+              <Card.Body className="d-flex align-items-center justify-content-center">
+                <CreateEventModal/>
+              </Card.Body>
+            </Card>
+          </div>
+        }
         {events.map((item, index) => {
           return (
             <div key={index} className="col-12 col-md-6 col-lg-4 mb-4">
