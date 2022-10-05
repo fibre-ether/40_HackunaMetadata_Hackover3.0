@@ -43,7 +43,7 @@ const handleImageUpload = (e) => {
   return (
     <div className="container font-poppins">
       <div className="row">
-        <div className="col-12 offset-lg-1 col-lg-10">
+        <div className="col-12 offset-md-1 col-md-10 offset-lg-2 col-lg-8">
           <Card className="box-shadow">
             <Card.Header>
             <div className="row">
@@ -97,7 +97,7 @@ const handleImageUpload = (e) => {
                   }
                   <div className="col-12 offset-md-2 col-md-8 mt-5">
                     <button
-                      className="navy-btn w-100 justify-center rounded-md border border-transparent py-2 px-4 text-white focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 font-semibold text-lg disabled:bg-indigo-400 "
+                      className="navy-btn w-100 justify-center rounded-md border border-transparent py-2 px-4 text-white focus:outline-none focus:ring-2 focus:ring-purple-300 focus:ring-offset-2 font-semibold text-lg disabled:bg-purple-300 "
                       disabled={authLoader==="loading"}
                       >
                       {authLoader==="loading" ? "Creating Account..." : "Create Account"}

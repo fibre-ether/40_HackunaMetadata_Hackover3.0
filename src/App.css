@@ -39,16 +39,46 @@
 }
 .login_signup_header {
   font-size: 30px;
-  color: #512DA8;
+  color: #9575CD;
   font-weight: 600;
 }
 .navy-btn {
-  background: #512DA8;
+  background: #9575CD;
 }
 .box-shadow {
   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 }
-.register_tabs:focus {
+/* .register_tabs:focus {
   border: none;
   border-bottom: 2px solid black;
+} */
+
+.card-img-top {
+  width: 100%;
+  height: 7.5rem;
+  object-fit: cover;
+}
+.events_card_header {
+  font-size: 30px;
+  font-weight: 550;
+}
+.events_card_desc {
+  font-size: 16px;
+  font-weight: 500;
+  color: gray;
+}
+.modal_header {
+  font-size: 30px;
+  font-weight: 550;
+}
+.modal_dismiss_btn:focus {
+  border: none;
+}
+.add_event_btn {
+  font-size: 20px;
+  font-weight: 500;
+  border: dotted;
+}
+.add_event_btn:hover {
+  border: solid;
 }
