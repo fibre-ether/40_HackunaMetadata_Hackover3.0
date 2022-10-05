@@ -5,7 +5,7 @@ import util from 'util';
 import {Storage} from '@google-cloud/storage';
 import path from 'path';
 // import jwt from 'jsonwebtoken'
-// import { sendWelcomeEmail } from '../emails/account.js'
+import { sendWelcomeEmail } from '../emails/account.js'
 
 
 
@@ -27,9 +27,10 @@ const fileUpload = async function (req, res, next) {
   blobStream.on("error", (err) => {
     next(err);
   });
-  blobStream.on("finish", () => {
+  blobStream.on("finish", async() => {
     // The public URL can be used to directly access the file via HTTP.
     const publicUrl = util.format(`https://storage.googleapis.com/${bucket.name}/${blob.name}`);
+    const user = await User.findOneAndUpdate({_id : req.id} ,  {'kyc_link': publicUrl });
     res.status(200).json({ url: publicUrl });
   });
   blobStream.end(req.file.buffer);
@@ -108,7 +109,7 @@ const joinEvent = async (req, res) => {
     const {id , event_id} = req.body;
     const user = await User.findOneAndUpdate({_id : id} ,  {'$push': { 'otherEvents': event_id} });
     await Event.findOneAndUpdate({_id : req.body.id},{$inc : {'participants' : 1}} , {upsert:true});
-    //sendWelcomeEmail(user.email, user.name)
+    sendWelcomeEmail("", "")
     res.status(201).send({"status" : true , "event" : "subscribed to event successfully!"})
   } catch (e) {
     res.status(400).json({

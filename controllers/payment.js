@@ -2,6 +2,7 @@ import crypto from 'crypto';
 import fs from 'fs';
 import Razorpay from 'razorpay';
 import shortid from 'shortid';
+import User from '../models/Users.js';
 
 const razorpay = new Razorpay({
     key_id: 'rzp_test_jsXvpbAIRO5fPn',
@@ -35,8 +36,9 @@ const makePayment =  async (req, res) => {
 	const payment_capture = 1
 	const currency = 'INR'
 
+
 	const options = {
-		amount: amount * 100,
+		amount: parseInt(amount),
 		currency,
 		receipt: shortid.generate(),
 		payment_capture
@@ -44,7 +46,9 @@ const makePayment =  async (req, res) => {
 
 	try {
 		const response = await razorpay.orders.create(options)
+		console.log(response)
 		const user = await User.findOneAndUpdate({_id : id} ,  {'$push': { 'otherEvents': event_id} });
+		console.log(user)
 		if(user){
 			res.status(201).json({
 				id: response.id,

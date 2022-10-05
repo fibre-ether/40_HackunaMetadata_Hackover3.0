@@ -31,6 +31,10 @@ const userSchema = mongoose.Schema({
     myEvents : {
         type : Array , "default" : []
     },
+    kyc_link:{
+        type: String,
+        "default" : true
+    },
     added_at : { type : Date, default: Date.now },
     //timestamps : true,
 });

@@ -15,7 +15,9 @@ await db()
 app.use(morgan(':method :url :status :response-time ms'))
 app.use(express.urlencoded({ extended: true }));
 app.use(cors())
-app.use(express.json())
+app.use(express.json({
+  type: ['application/json', 'text/plain']
+}))
 app.use('/api/v1/user', userRouter)
 app.use('/api/v1/event', eventRouter)
 app.use('/api/v1/', paymentRouter)
