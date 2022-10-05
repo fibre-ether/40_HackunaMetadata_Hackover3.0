@@ -7,6 +7,11 @@ const auth = {
 
 const event = {
   getAll: "event/getAll",
+  getAllCats: "event/getAllCats",
+  getEventsByCats: "event/getEventsByCats",
+  create: "event/create",
+  update: "event/update",
+  delete: "event/delete",
 }
 
 const user = {

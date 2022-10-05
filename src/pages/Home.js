@@ -16,6 +16,8 @@ function Home() {
 
   useEffect(() => {
     dispatch(getAllEvents());
+    dispatch(getAllCategories());
+    dispatch(getEventsByCategories({category: "Hackathon"}));
   }, [dispatch]);
 
   return (
