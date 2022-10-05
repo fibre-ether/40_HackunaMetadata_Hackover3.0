@@ -30,7 +30,7 @@ function Footer(props) {
                         <div className="row text-center">
                             <div className='col-auto'><a className="btn btn-social-icon btn-google" href="http://google.com/+"><i className="fa fa-google-plus"></i></a></div>
                             <div className='col-auto'><a className="btn btn-social-icon btn-facebook" href="http://www.facebook.com/profile.php?id="><i className="fa fa-facebook"></i></a></div>
-                            <div className='col-auto'><a className="btn btn-social-icon btn-linkedin" href="http://www.linkedin.com/in/"><i className="fa fa-linkedin"></i></a></div>
+                            <div className='col-auto'><a className="btn btn-social-icon btn-linkedin" href="https://www.linkedin.com/in/bhavik-jain-0a9ba0217"><i className="fa fa-linkedin"></i></a></div>
                             <div className='col-auto'><a className="btn btn-social-icon btn-twitter" href="http://twitter.com/"><i className="fa fa-twitter"></i></a></div>
                             <div className='col-auto'><a className="btn btn-social-icon btn-google" href="http://youtube.com/"><i className="fa fa-youtube"></i></a></div>
                         </div>

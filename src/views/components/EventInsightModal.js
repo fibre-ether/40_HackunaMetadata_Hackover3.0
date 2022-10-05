@@ -2,6 +2,7 @@ import { useState } from "react";
 import Modal from 'react-bootstrap/Modal';
 import { AiOutlineClose } from 'react-icons/ai'
 import { Card } from "react-bootstrap";
+import RazorPay from "./razorPay";
 
 export default function EventInsightModal(props) { 
     const [show, setShow] = useState(false);
@@ -28,7 +29,10 @@ export default function EventInsightModal(props) {
                 <div className="col-12">{props.item.starts_at} - {props.item.ends_at}</div>
                 <div className="col-12 mt-3">
                     {props.item.price ?
-                        <button className="btn btn-md btn-danger" disabled>&#8377; {props.item.price}</button>:
+                        <div className="row">
+                            <div className="col-6 col-lg-4"><button className="btn btn-md btn-danger w-100" disabled>&#8377; {props.item.price}</button></div>
+                            <div className="col-6 col-lg-4" onClick={handleClose}><RazorPay amount={props.item.price}/></div>
+                        </div>:
                         <button className="btn btn-md btn-success" disabled>Free</button>
                         }
                 </div>
