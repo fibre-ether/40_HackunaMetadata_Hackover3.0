@@ -2,16 +2,18 @@ from dotenv import load_dotenv
 import os
 import time
 from PIL import Image, ImageDraw
-from matplotlib import pyplot as plt
 import requests
+from flask import Flask, request, jsonify
 
 # Import namespaces
 from azure.cognitiveservices.vision.computervision import ComputerVisionClient
 from azure.cognitiveservices.vision.computervision.models import OperationStatusCodes
 from msrest.authentication import CognitiveServicesCredentials
 
-def main():
+app = Flask(__name__)
+app.config['SECRET_KEY'] = '8BYkEfBA6O6donzWlSihBXox7C0sKR6b'
 
+def Azure_Reader():
     global cv_client
 
     try:
@@ -77,5 +79,15 @@ def GetTextRead(image_file):
                 #     note.write('\n')
     return output
 
+
+@app.route('/')
+def home():
+    return {'message':'Server Running'}
+
+@app.route('/image', methods=["POST"])
+def ocr_img():
+    data = request.get_json()
+
 if __name__ == "__main__":
-    main()
+    # app.run(debug=True)
+    Azure_Reader()
