@@ -5,6 +5,8 @@ const event = createSlice({
   name: "event",
   initialState: {
     events: [],
+    eventsByCats: [],
+    categories: [],
     eventLoader: "idle",
   },
   reducers: {
@@ -19,6 +21,26 @@ const event = createSlice({
     builder.addCase(eventActions.getAll + fulfilled, (state, { payload }) => {
       console.log(payload);
       state.events = payload;
+    });
+    builder.addCase(eventActions.create + fulfilled, (state, { payload }) => {
+      console.log(payload);
+      state.events = [...state.events, payload.event];
+    });
+    builder.addCase(eventActions.delete + fulfilled, (state, { payload }) => {
+      console.log(payload);
+      state.events = state.events.filter((event) => {return event._id !== payload.id})
+    });
+    builder.addCase(eventActions.update + fulfilled, (state, { payload }) => {
+      console.log(payload);
+      //state.events = state.events.filter((event) => {return event._id !== payload.id})
+    });
+    builder.addCase(eventActions.getAllCats + fulfilled, (state, { payload }) => {
+      console.log(payload);
+      state.categories = payload.category;
+    });
+    builder.addCase(eventActions.getEventsByCats + fulfilled, (state, { payload }) => {
+      console.log(payload);
+      state.eventsByCats = payload.events || [];
     });
   },
 });
