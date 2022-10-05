@@ -109,7 +109,7 @@ const createEvent = async (req, res) => {
         try{
             let event = await Event.findOneAndUpdate({_id : req.body.id}, req.body.data);
 
-              res.status(400).json({'message' : 'Updated Successfully ! ', 'status': true,});
+              res.status(201).json({'message' : 'Updated Successfully ! ', 'status': true,  "event" : event});
 
         }catch(error){
             console.log(error);
