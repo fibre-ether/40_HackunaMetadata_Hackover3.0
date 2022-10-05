@@ -28,6 +28,11 @@ const eventSchema = mongoose.Schema({
         type:String,
         required: [true,'Please enter the venue'],
     },
+    participants : {
+        type: Number,
+        required : [false],
+        "defaults" : 0
+    },
     starts_at : {
         type : Date
     },

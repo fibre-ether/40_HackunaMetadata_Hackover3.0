@@ -13,7 +13,7 @@ const app = express()
 await db()
 
 app.use(morgan(':method :url :status :response-time ms'))
-
+app.use(express.urlencoded({ extended: true }));
 app.use(cors())
 app.use(express.json())
 app.use('/api/v1/user', userRouter)

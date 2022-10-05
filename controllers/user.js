@@ -1,7 +1,40 @@
 import User from '../models/Users.js';
+import Event from '../models/Events.js';
 import mongoose, { mongo } from 'mongoose';
+import util from 'util';
+import {Storage} from '@google-cloud/storage';
+import path from 'path';
 // import jwt from 'jsonwebtoken'
 // import { sendWelcomeEmail } from '../emails/account.js'
+
+
+
+const __dirname = path.dirname('secret.json');
+const cloudStorage = new Storage({
+  keyFilename: `${__dirname}/secret.json`,
+  projectId: "iconic-being-364602",
+});
+const bucketName = "hackover-ojas";
+const bucket = cloudStorage.bucket(bucketName);
+
+const fileUpload = async function (req, res, next) {
+  if (!req.file) {
+    res.status(400).send("No file uploaded.");
+    return;
+  }
+  const blob = bucket.file(req.file.originalname);
+  const blobStream = blob.createWriteStream();
+  blobStream.on("error", (err) => {
+    next(err);
+  });
+  blobStream.on("finish", () => {
+    // The public URL can be used to directly access the file via HTTP.
+    const publicUrl = util.format(`https://storage.googleapis.com/${bucket.name}/${blob.name}`);
+    res.status(200).json({ url: publicUrl });
+  });
+  blobStream.end(req.file.buffer);
+  console.log(req.file);
+};
 
 const login = async (req, res) => {
 
@@ -74,7 +107,7 @@ const joinEvent = async (req, res) => {
   try {
     const {id , event_id} = req.body;
     const user = await User.findOneAndUpdate({_id : id} ,  {'$push': { 'otherEvents': event_id} });
-    console.log(user);
+    await Event.findOneAndUpdate({_id : req.body.id},{$inc : {'participants' : 1}} , {upsert:true});
     //sendWelcomeEmail(user.email, user.name)
     res.status(201).send({"status" : true , "event" : "subscribed to event successfully!"})
   } catch (e) {
@@ -91,5 +124,6 @@ const joinEvent = async (req, res) => {
     login,
     registerNewUser,
     getUnverifiedOrganizers,
-    joinEvent
+    joinEvent,
+    fileUpload
   }

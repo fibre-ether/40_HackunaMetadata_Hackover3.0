@@ -3,13 +3,17 @@ import nodemailer from 'nodemailer';
 import dotenv from 'dotenv'
 dotenv.config()
 
-const transporter = nodemailer.createTransport({
-  service: "hotmail",
+let transporter = nodemailer.createTransport({
+  service: 'gmail',
   auth: {
-    user: process.env.EMAIL_ACCOUNT,
-    pass: process.env.EMAIL_PASSWORD
+    type: 'OAuth2',
+    user: process.env.MAIL_USERNAME,
+    pass: process.env.MAIL_PASSWORD,
+    clientId: process.env.OAUTH_CLIENTID,
+    clientSecret: process.env.OAUTH_CLIENT_SECRET,
+    refreshToken: process.env.OAUTH_REFRESH_TOKEN
   }
-})
+});
 
 const sendWelcomeEmail = (email, name) => transporter.sendMail({
   from: process.env.EMAIL_ACCOUNT,
