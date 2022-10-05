@@ -1,7 +1,6 @@
 from dotenv import load_dotenv
 import os
 import time
-from PIL import Image, ImageDraw
 import requests
 from flask import Flask, request, jsonify
 
@@ -11,7 +10,6 @@ from azure.cognitiveservices.vision.computervision.models import OperationStatus
 from msrest.authentication import CognitiveServicesCredentials
 
 app = Flask(__name__)
-app.config['SECRET_KEY'] = '8BYkEfBA6O6donzWlSihBXox7C0sKR6b'
 
 def Azure_Reader():
     global cv_client
@@ -88,6 +86,7 @@ def home():
 def ocr_img():
     data = request.get_json()
     print(data)
+    return 'Recieved'
 
 if __name__ == "__main__":
     app.run(debug=True)
