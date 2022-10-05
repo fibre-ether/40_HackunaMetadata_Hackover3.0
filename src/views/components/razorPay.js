@@ -1,6 +1,4 @@
 import React from "react";
-import logo from "../../assets/logo512.png";
-import "./razorPay.css";
 
 function loadScript(src) {
   return new Promise((resolve) => {
@@ -16,24 +14,28 @@ function loadScript(src) {
   });
 }
 
-function RazorPay() {
+function RazorPay(props) {
   async function showRazorpay() {
     const res = await loadScript(
       "https://checkout.razorpay.com/v1/checkout.js"
     );
 
     if (!res) {
-      alert("Razorpay SDK failed to load. Are you online?");
+      alert("Razorpay SDK failed to load. Check your network connection");
       return;
     }
 
     const data = await fetch(
-      "https://hackover-backend-40.vercel.app/api/v1/pay",
+      "http://hackover-backend-40.vercel.app/api/v1/pay",
       {
         method: "POST",
+        body: JSON.stringify({
+          id: '633c59269d1070d6bfc2c28d',
+          event_id: '633c7451d39f0570770f1a01',
+          amount : props.amount*100
+        })
       }
     ).then((t) => t.json());
-
     console.log(data);
 
     const options = {
@@ -62,19 +64,13 @@ function RazorPay() {
   }
 
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
         <button
-          className="App-link"
+          className="btn btn-md btn-primary w-100"
           onClick={showRazorpay}
           target="_blank"
           rel="noopener noreferrer"
-        >
-          Pay now
+        >Pay now
         </button>
-      </header>
-    </div>
   );
 }
 

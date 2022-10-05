@@ -22,7 +22,7 @@ function Home() {
   
   return (
     <div className="container font-poppins">
-        { (user.role==="admin" || (user.role=="organizer" && user.verified) || user.role==="user") && 
+        { (user.role==="admin" || (user.role==="organizer" && user.verified) || user.role==="user") && 
           <div className="d-flex flex-row-reverse">
             <select className="col-7 col-md-5 col-lg-3 p-2 select_filter" onChange={(e)=>{dispatch(getEventsByCategories({category: e.target.value}));}}>
               <option selected>All</option>
