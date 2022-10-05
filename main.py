@@ -87,7 +87,8 @@ def home():
 @app.route('/image', methods=["POST"])
 def ocr_img():
     data = request.get_json()
+    print(data)
 
 if __name__ == "__main__":
-    # app.run(debug=True)
-    Azure_Reader()
+    app.run(debug=True)
+    # Azure_Reader()
