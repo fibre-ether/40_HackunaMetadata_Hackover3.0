@@ -33,7 +33,8 @@ def Azure_Reader(img_url):
             fp.write(response.content)
             fp.close()
         
-        output = GetTextRead('greenland_01a.png', img_url=img_url)
+        # output = GetTextRead('greenland_01a.png', img_url=img_url)
+        output = GetTextRead('driver license_sample.jpeg', img_url=img_url)
         # GetTextRead(image_file)  
         print(output)   
         return output  
@@ -70,8 +71,12 @@ def GetTextRead(image_file, img_url):
             for page in read_results.analyze_result.read_results:
                 text = []
                 for line in page.lines:
-                    text.append(str(line.text))
-                    print(line.text)
+                    if len(line.text.split(' '))>1:
+                        for ele in line.text.split(' '):
+                            text.append(str(ele))
+                    else:
+                        text.append(str(line.text))
+                    # print(line.text)
                 output['data'] = text
     return output
 
@@ -84,13 +89,21 @@ def home():
 def ocr_img():
     data = request.get_json()
     img_url = data['image_url']
-    name = data['name']
+    name = data['name'].strip()
     output = Azure_Reader(img_url)
     
-    if name in output['data']:
+    if len(name.split(' '))>1:
         output['verified'] = True
-    else:
-        output['verified'] = False
+        for ele in name.split(' '):
+            print(ele)
+            if ele not in output['data']:
+                output['verified'] = False 
+                break 
+    else:  
+        if name.upper() in output['data']:
+            output['verified'] = True
+        else:
+            output['verified'] = False
     return output
 
 if __name__ == "__main__":
