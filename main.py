@@ -11,14 +11,14 @@ from msrest.authentication import CognitiveServicesCredentials
 
 app = Flask(__name__)
 
-def Azure_Reader():
+def Azure_Reader(img_url):
     global cv_client
 
     try:
         # Get Configuration Settings
         load_dotenv()
-        cog_endpoint = os.getenv('COG_SERVICE_ENDPOINT')
-        cog_key = os.getenv('COG_SERVICE_KEY')
+        cog_endpoint = os.getenv('REACT_APP_COG_SERVICE_ENDPOINT')
+        cog_key = os.getenv('REACT_APP_COG_SERVICE_KEY')
 
         # Authenticate Computer Vision client
         credential = CognitiveServicesCredentials(cog_key) 
@@ -26,30 +26,31 @@ def Azure_Reader():
                 
         # Menu for text reading functions        
         # image_file = os.path.join('images','Rome.pdf')
-        image_file = 'driver license_sample.jpeg'
-        image_file = 'credit score.png'
         
-        img_url = 'https://raw.githubusercontent.com/fibre-ether/40_HackunaMetadata_Hackover3.0/login/src/assets/test_image.jpg'
-        img_url = 'https://upload.wikimedia.org/wikipedia/commons/thumb/0/06/Slovenian_ID_Card_2022_-_Front.jpg/250px-Slovenian_ID_Card_2022_-_Front.jpg'
         response = requests.get(img_url)
         if response.status_code:
             fp = open(f'greenland_01a.png', 'wb')
             fp.write(response.content)
             fp.close()
         
-        output = GetTextRead('greenland_01a.png')
+        output = GetTextRead('greenland_01a.png', img_url=img_url)
         # GetTextRead(image_file)  
-        print(output)     
+        print(output)   
+        return output  
 
     except Exception as ex:
         print(ex)
+        output = {}
+        output['verified'] = False
+        return output
 
 
-def GetTextRead(image_file):
+def GetTextRead(image_file, img_url):
     print('Reading text in {}\n'.format(image_file))
     # Use Read API to read text in image
     output = {}
     output['name'] = image_file
+    output['image'] = img_url
     with open(image_file, mode="rb") as image_data:
         read_op = cv_client.read_in_stream(image_data, raw=True)
 
@@ -72,9 +73,6 @@ def GetTextRead(image_file):
                     text.append(str(line.text))
                     print(line.text)
                 output['data'] = text
-                # with open('note.txt', 'a') as note:
-                #     note.write(str(text))
-                #     note.write('\n')
     return output
 
 
@@ -82,11 +80,18 @@ def GetTextRead(image_file):
 def home():
     return {'message':'Server Running'}
 
-@app.route('/image', methods=["POST"])
+@app.route('/verifyImage', methods=["POST"])
 def ocr_img():
     data = request.get_json()
-    print(data)
-    return 'Recieved'
+    img_url = data['image_url']
+    name = data['name']
+    output = Azure_Reader(img_url)
+    
+    if name in output['data']:
+        output['verified'] = True
+    else:
+        output['verified'] = False
+    return output
 
 if __name__ == "__main__":
     app.run(debug=True)
