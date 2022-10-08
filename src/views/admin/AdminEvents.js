@@ -1,5 +1,4 @@
 import Card from "react-bootstrap/Card";
-import RazorPay from "../components/razorPay";
 
 export default function AdminEvents() {
   return (
@@ -51,7 +50,6 @@ export default function AdminEvents() {
           </Card>
         </div>
       </div>
-      <RazorPay />
     </div>
   );
 }

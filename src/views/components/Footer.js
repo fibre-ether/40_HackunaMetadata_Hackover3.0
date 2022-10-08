@@ -5,25 +5,21 @@ function Footer(props) {
     return(
         <div className="footer font-poppins mt-5">
             <div className="container">
-                <div className="row justify-content-center">
+                <div className="row justify-content-center p-4">
                     <div className="col-4 offset-1 col-sm-2">
-                        {/* <h1>Links</h1> */}
+                        <h1 className='footer_titles mb-2'>Links</h1>
                         <ul className="list-unstyled">
-                            <li><Link to="#">Home</Link></li>
-                            <li><Link to="#">About</Link></li>
-                            <li><Link to="#">Menu</Link></li>
-                            <li><Link to="#">Contact</Link></li>
+                            <li><Link to="/">Home</Link></li>
+                            <li><Link to="/login">Login</Link></li>
+                            <li><Link to="/register">Register</Link></li>
                         </ul>
                     </div>
                     <div className="col-7 col-sm-5">
-                        <h5 className='mb-2'>Our Address</h5>
+                        <h5 className='mb-2 footer_titles'>Our Address</h5>
                         <address>
-                            Line1<br />
-		              Line2<br />
-		              Line3<br />
-                            <i className="fa fa-phone fa-lg mt-3"></i>: +852 1234 5678<br />
-                            <i className="fa fa-envelope fa-lg"></i>: <Link to="mailto:confusion@food.net">
-                                confusion@food.net</Link>
+                            <i className="fa fa-phone fa-lg mt-3"></i>: 1800 1800 1800<br />
+                            <i className="fa fa-envelope fa-lg"></i>: <Link to="mailto:contact@name.co.in">
+                                contact@name.co.in</Link>
                         </address>
                     </div>
                     <div className="col-12 col-sm-4 align-self-center">

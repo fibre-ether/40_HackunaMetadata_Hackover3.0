@@ -45,12 +45,10 @@ const handleImageUpload = (e) => {
       <div className="row">
         <div className="col-12 offset-md-1 col-md-10 offset-lg-2 col-lg-8">
           <Card className="box-shadow">
-            <Card.Header>
-            <div className="row">
-                  <div className="col-6"><button className="btn btn-lg w-100" onClick={() => setUserType("user")}>User</button></div>
-                  <div className="col-6"><button className="btn btn-lg w-100" onClick={() => setUserType("organizer")}>Organizer</button></div>
-                </div>
-            </Card.Header>
+            <div className="row mt-2">
+                  <div className="col-6"><button className="w-100 register_tabs p-2" autoFocus onClick={() => setUserType("user")}>User</button></div>
+                  <div className="col-6"><button className="w-100 register_tabs p-2" onClick={() => setUserType("organizer")}>Organizer</button></div>
+            </div>
             <Card.Body>
               <Card.Title>
                 
@@ -95,7 +93,7 @@ const handleImageUpload = (e) => {
                           }
                         </div>
                   }
-                  <div className="col-12 offset-md-2 col-md-8 mt-5">
+                  <div className="col-12 offset-md-2 col-md-8 mt-3">
                     <button
                       className="navy-btn w-100 justify-center rounded-md border border-transparent py-2 px-4 text-white focus:outline-none focus:ring-2 focus:ring-purple-300 focus:ring-offset-2 font-semibold text-lg disabled:bg-purple-300 "
                       disabled={authLoader==="loading"}
