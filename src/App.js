@@ -1,7 +1,7 @@
 import React from "react";
 import "./App.css";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import Navbar from "./views/components/Navbar";
+import Dynamicnavbar from "./views/components/DynamicNavbar";
 import Footer from "./views/components/Footer";
 import AdminEvents from "./views/admin/AdminEvents";
 import Login from "./pages/Login";
@@ -18,7 +18,7 @@ function App() {
       <Provider store={store}>
         <Toaster position="top-right" />
         <BrowserRouter>
-          <Navbar />
+          <Dynamicnavbar />
           <Routes>
             <Route path="/register" name="register" element={<Register />} />
             <Route path="/login" name="login" element={<Login/>} />

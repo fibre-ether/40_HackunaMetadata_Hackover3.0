@@ -39,13 +39,11 @@ function Login() {
       <div className="row">
         <div className="col-12 offset-md-1 col-md-10 offset-lg-2 col-lg-8">
           <Card className="box-shadow">
-            <Card.Header>
-            <div className="row">
-                  <div className="col-4"><button className="w-100 register_tabs" onClick={() => setUserType("user")}>User</button></div>
-                  <div className="col-4"><button className="w-100 register_tabs" onClick={() => setUserType("organizer")}>Organizer</button></div>
-                  <div className="col-4"><button className="mb-n1 w-100 register_tabs" onClick={() => setUserType("admin")}>Admin</button></div>
-                </div>
-            </Card.Header>
+            <div className="row mt-2">
+                  <div className="col-4"><button className="w-100 register_tabs p-2" autoFocus onClick={() => setUserType("user")}>User</button></div>
+                  <div className="col-4"><button className="w-100 register_tabs p-2" onClick={() => setUserType("organizer")}>Organizer</button></div>
+                  <div className="col-4"><button className="mb-n1 w-100 register_tabs p-2" onClick={() => setUserType("admin")}>Admin</button></div>
+            </div>
             <Card.Body>
               
               <Card.Title>
